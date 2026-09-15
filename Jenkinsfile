@@ -14,6 +14,9 @@ pipeline {
             }
         }
         stage("build jar") {
+            when {
+        branch 'master'
+            }
             steps {
                 script {
                     gv.buildJar()
@@ -23,6 +26,9 @@ pipeline {
         }
 
         stage("build image") {
+            when {
+        branch 'master'
+            }
             steps {
                 script {
                     gv.buildImage()
@@ -31,6 +37,9 @@ pipeline {
         }
 
         stage("deploy") {
+            when {
+        branch 'master'
+            }
             steps {
                 script {
                     gv.deployApp()
