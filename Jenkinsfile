@@ -26,7 +26,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    buildImage()
+                    buildImage 'soaden/demo-repo-1:jma-3.0'
                 }
             }
         }
