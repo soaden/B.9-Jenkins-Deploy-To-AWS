@@ -41,6 +41,19 @@ The use case demonstrates how a single, shared `Jenkinsfile` can define differen
 **Jenkins Shared Library**
 
 The `feature/jenkins-shared-library` branch demonstrates Jenkins Shared Library functionality.  
+
 In that branch, the `Jenkinsfile` uses functions `buildJar` and `buildImage` provided by the Shared Library instead of defining them in `script.groovy`.  
 This approach enables pipeline functions to be reused across multiple pipelines and projects.  
+
 The Jenkins Shared Library implementation is maintained in a separate repository: https://github.com/soaden/B.8-Jenkins-Shared-Library.  
+
+**Increment Build Version**
+
+The `feature/increment-build-version` branch demonstrates automatic build version incrementing.
+
+In that branch, `script.groovy` increments the version in `pom.xml`, which defines the application build version. The `IMAGE_NAME` variable is used to assign the corresponding Docker image tag.
+
+The `Jenkinsfile` contains two additional stages to handle the versioning workflow. In the `Dockerfile`, `ENTRYPOINT` is replaced with `CMD` so the application can be started using the version-dependent JAR filename.
+
+The `pushVersionUpdate` function in `script.groovy` commits and pushes the updated `pom.xml` back to GitHub. A Jenkins plugin prevents these Jenkins-authored commits from triggering another build through the GitHub webhook, avoiding a build loop.
+
