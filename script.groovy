@@ -14,7 +14,6 @@ def buildImage() {
 
 def deployApp() {
     echo 'deploying the application...'
-    echo 'this run tested webhook pipeline trigger'
 }
 
 return this
