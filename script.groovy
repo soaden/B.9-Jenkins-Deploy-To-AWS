@@ -13,7 +13,12 @@ def buildImage() {
 }
 
 def deployApp() {
-    echo 'deploying the application...'
+    echo 'deploying the application to AWS...'
+    def dockerCmd = 'docker run -p 3080:3080 -d soaden/bootcamp-m9:1.0'
+    def targetIP = '63.179.53.73'
+    sshagent(['aws-webserver-ssh']) {
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@${targetIP} ${dockerCmd}"
+    }
 }
 
 return this

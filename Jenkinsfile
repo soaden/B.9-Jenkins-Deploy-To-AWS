@@ -13,6 +13,7 @@ pipeline {
                 }
             }
         }
+        /*
         stage("build jar") {
             steps {
                 script {
@@ -29,7 +30,7 @@ pipeline {
                 }
             }
         }
-
+        */
         stage("deploy") {
             steps {
                 script {
