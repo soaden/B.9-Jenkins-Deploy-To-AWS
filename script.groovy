@@ -17,10 +17,11 @@ def buildImage() {
 
 def deployApp() {
     echo 'deploying the application to AWS...'
-    def dockerCmd = 'docker run -p 8080:8080 -d soaden/bootcamp-m9:2.0'
+    def dockerComposeCmd = 'docker compose -f docker-compose.yaml up --detach'
     def targetIP = '63.179.53.73'
     sshagent(['aws-webserver-ssh']) {
-        sh "ssh -o StrictHostKeyChecking=no ec2-user@${targetIP} ${dockerCmd}"
+        sh "scp docker-compose.yaml ec2-user@${targetIP}:/home/ec2-user"
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@${targetIP} ${dockerComposeCmd}"
     }
 }
 
