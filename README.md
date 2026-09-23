@@ -35,6 +35,12 @@ The pipeline executes the following steps:
 
 The `master` branch demonstrates basic deployment to AWS EC2. Compared to the base repo (https://github.com/soaden/B.8-Jenkins), here the function `deployApp` in the `script.groovy` implements the logic for Jenkins to SSH-connect to an AWS EC2 instance, pull the Docker image from Docker Hub and run container.
 
+**Docker Compose**
+
+The `feature/docker-compose` branch demonstrates the Docker Compose Plugin capability.
+It allows to deploy several containers in one command through the added to repository `docker-compose.yaml` file.
+This file is copied by Jenkins to the target server and executed with `docker compose` command (changes reflected in `script.groovy` file.
+
 **Jenkins Multibranch Pipeline**
 
 The `feature/multi-branch-pipeline` branch demonstrates Jenkins Multibranch Pipeline functionality.
