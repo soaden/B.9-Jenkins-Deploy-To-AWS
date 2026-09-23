@@ -40,7 +40,9 @@ The `master` branch demonstrates basic deployment to AWS EC2. Compared to the ba
 The `feature/docker-compose` branch demonstrates the Docker Compose Plugin capability.
 It allows to deploy several containers in one command through the added to repository `docker-compose.yaml` file.
 This file is copied by Jenkins to the target server and executed with `docker compose` command - changes reflected in `script.groovy` file.
-Note that a shell script can be uploaded to the target server and executed there in the same way, which is useful for more complex deployments.
+
+Note that a shell script can be uploaded to the target server and executed there in the same way.
+It is useful for more complex deployments, including setting up environment variables on target (e.g. for Docker Compose file itself).
 
 **Jenkins Multibranch Pipeline**
 
