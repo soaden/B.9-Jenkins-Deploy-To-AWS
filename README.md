@@ -1,15 +1,16 @@
-# Jenkins Pipeline Demo
+# Jenkins Deployment to AWS EC2
 
-This repository is checked out by Jenkins and demonstrates a Jenkins CI/CD pipeline integrating Maven, Docker, and Docker Hub.
+This repository is based on a clone from https://github.com/soaden/B.8-Jenkins (check that repo's README for a full overview).
+It complements the previously demonstrated version of Jenkins CI/CD pipeline with actual deployment to AWS EC2.
 
 ## Technologies
 
 - Jenkins
 - Groovy
-- Maven
-- Java
 - Docker
+- Docker Compose
 - Docker Hub
+- AWS
 
 ## Pipeline
 
@@ -18,7 +19,7 @@ The pipeline executes the following steps:
 1. Build the Java application with Maven.
 2. Build a Docker image containing the application.
 3. Publish the Docker image to a Docker Hub repository.
-4. Simulate application deployment by logging the deployment step.
+4. Deploy a container to AWS EC2 instance from Docker Hub image.
 
 ## Repository structure
 
@@ -29,6 +30,10 @@ The pipeline executes the following steps:
 - `.gitignore` — Git ignore rules.
 
 ## Branches
+
+**Master**
+
+The `master` branch demonstrates basic deployment to AWS EC2. Compared to the base repo (https://github.com/soaden/B.8-Jenkins), here the function `deployApp` in the `script.groovy` implements the logic for Jenkins to SSH-connect to an AWS EC2 instance, pull the Docker image from Docker Hub and run container.
 
 **Jenkins Multibranch Pipeline**
 
