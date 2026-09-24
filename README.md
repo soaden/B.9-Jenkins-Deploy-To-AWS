@@ -1,15 +1,16 @@
-# Jenkins Deployment to AWS EC2
+# Jenkins Pipeline Demo
 
-This repository is based on a clone from https://github.com/soaden/B.8-Jenkins (check that repo's README for a full overview).
-It complements the previously demonstrated version of Jenkins CI/CD pipeline with actual deployment to AWS EC2.
+This repository is checked out by Jenkins and demonstrates a Jenkins CI/CD pipeline integrating Maven, Docker, Docker Hub and AWS EC2.
 
 ## Technologies
 
 - Jenkins
 - Groovy
+- Maven
+- Java
 - Docker
-- Docker Compose
 - Docker Hub
+- Docker Compose
 - AWS
 
 ## Pipeline
@@ -19,7 +20,7 @@ The pipeline executes the following steps:
 1. Build the Java application with Maven.
 2. Build a Docker image containing the application.
 3. Publish the Docker image to a Docker Hub repository.
-4. Deploy a container to AWS EC2 instance from Docker Hub image.
+4. Deploy the application to an AWS EC2 instance using the Docker Hub image.
 
 ## Repository structure
 
@@ -30,19 +31,6 @@ The pipeline executes the following steps:
 - `.gitignore` — Git ignore rules.
 
 ## Branches
-
-**Master**
-
-The `master` branch demonstrates basic deployment to AWS EC2. Compared to the base repo (https://github.com/soaden/B.8-Jenkins), here the function `deployApp` in the `script.groovy` implements the logic for Jenkins to SSH-connect to an AWS EC2 instance, pull the Docker image from Docker Hub and run container.
-
-**Docker Compose**
-
-The `feature/docker-compose` branch demonstrates the Docker Compose Plugin capability.
-It allows to deploy several containers in one command through the added to repository `docker-compose.yaml` file.
-This file is copied by Jenkins to the target server and executed with `docker compose` command - changes reflected in `script.groovy` file.
-
-Note that a shell script can be uploaded to the target server and executed there in the same way.
-It is useful for more complex deployments, including setting up environment variables on target (e.g. for Docker Compose file itself).
 
 **Jenkins Multibranch Pipeline**
 
@@ -60,6 +48,14 @@ In that branch, the `Jenkinsfile` uses functions `buildJar` and `buildImage` pro
 This approach enables pipeline functions to be reused across multiple pipelines and projects.  
 
 The Jenkins Shared Library implementation is maintained in a separate repository: https://github.com/soaden/B.8-Jenkins-Shared-Library.  
+
+**Docker Compose**
+
+The `feature/docker-compose` branch demonstrates deploying multiple containers using Docker Compose.
+The `docker-compose.yaml` file is copied by Jenkins to the target server and executed there using the `docker compose` command.
+The corresponding deployment logic is implemented in `script.groovy`.
+
+A shell script can be deployed and executed on the target server in the same way. This approach can be useful for more complex deployments, including setting environment variables to be used in Docker Compose files (e.g. for dynamic image versioning).
 
 **Increment Build Version**
 
